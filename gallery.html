@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Selected work and projects by me.">
+  <title>Gallery | Personal Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f4f9ff;
+      --ink: #123d5f;
+      --ink-soft: #426b8a;
+      --blue: #bfe0ff;
+      --blue-deep: #7db8e6;
+      --blue-accent: #4c8ecb;
+      --line: rgba(18, 61, 95, .18);
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: linear-gradient(180deg, #f4f9ff 0%, #edf6ff 100%); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(244, 249, 255, .72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .topbar .wrap {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+    }
+
+    .wordmark img {
+      display: block;
+      height: 30px;
+      width: auto;
+    }
+
+    nav { display: flex; gap: clamp(14px, 2.4vw, 32px); }
+    nav a {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity .2s ease;
+    }
+    nav a:hover { opacity: .8; }
+
+    main { padding-block: 52px 80px; }
+
+    .intro {
+      margin-bottom: 36px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 500;
+      line-height: 1.04;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .35);
+    }
+
+    .card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 18px 18px 20px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-block: 21px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 20px, 520px); }
+      .topbar .wrap { min-height: 52px; }
+      .wordmark img { height: 18px; }
+      nav { gap: 8px; }
+      nav a { font-size: 11px; }
+      main { padding-top: 28px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .card img { height: 220px; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="wordmark" href="index.html" aria-label="Home">
+        <img src="assets/logo.svg" alt="Logo" />
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="mailto:hello@example.com">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <p class="eyebrow">Selected work</p>
+      <h1>Things I’ve made and am still making.</h1>
+    </section>
+
+    <section class="gallery-grid" aria-label="Work gallery">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="People collaborating around a table">
+        <div class="card-body">
+          <span class="card-tag">Brand</span>
+          <h2>North Studio</h2>
+          <p>A thoughtful visual identity and portfolio site for a creative studio focused on telling clear stories.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Laptop and desk workspace with design materials">
+        <div class="card-body">
+          <span class="card-tag">Web</span>
+          <h2>Quiet Signals</h2>
+          <p>An editorial-style landing page built to showcase research, essays, and product thinking in a calm, readable layout.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Desk with digital design tools and notes">
+        <div class="card-body">
+          <span class="card-tag">Product</span>
+          <h2>Field Notes</h2>
+          <p>A prototype for capturing personal observations and ideas in a more tactile, reflective digital format.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Person working on a laptop in a warm office">
+        <div class="card-body">
+          <span class="card-tag">Strategy</span>
+          <h2>After Hours</h2>
+          <p>A small digital concept exploring how to turn personal routines into meaningful and shareable stories.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Minimal interior with soft lights and neutral furniture">
+        <div class="card-body">
+          <span class="card-tag">Print</span>
+          <h2>Soft Systems</h2>
+          <p>An experimental print-and-digital system exploring clean typography, rhythm, and subtle motion in a modern portfolio.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=80" alt="Hands working over sketches and a notebook">
+        <div class="card-body">
+          <span class="card-tag">Process</span>
+          <h2>Open Archive</h2>
+          <p>A personal project cataloging references, experiments, and fragments of work in an intentionally open, living archive.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Made with care, wherever I am.</p>
+    <a href="mailto:hello@example.com">hello@example.com</a>
+  </footer>
+</body>
+</html>

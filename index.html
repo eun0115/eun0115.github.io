@@ -265,12 +265,28 @@
   </footer>
 
   <script>
-    const toggleScrolledClass = () => {
-      document.body.classList.toggle('scrolled', window.scrollY > 12);
+    const syncNavState = () => {
+      const shouldCompact = window.scrollY > 40;
+      const isCompact = document.body.classList.contains('scrolled');
+
+      if (shouldCompact !== isCompact) {
+        document.body.classList.toggle('scrolled', shouldCompact);
+      }
     };
 
-    window.addEventListener('scroll', toggleScrolledClass, { passive: true });
-    toggleScrolledClass();
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          syncNavState();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    syncNavState();
   </script>
 </body>
 </html>

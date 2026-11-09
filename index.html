@@ -187,10 +187,28 @@
     .email { text-underline-offset: 3px; }
 
     @media (max-width: 700px) {
-      .wrap { width: min(100% - 36px, 520px); }
-      .topbar { min-height: 66px; }
-      nav { gap: 16px; }
-      nav a { font-size: 12px; }
+      .wrap { width: min(100% - 20px, 520px); }
+      .topbar {
+        min-height: 44px;
+        height: 44px;
+      }
+      .topbar .wrap {
+        min-height: 44px;
+        height: 44px;
+        gap: 10px;
+      }
+      body.scrolled .topbar {
+        min-height: 28px;
+        height: 28px;
+      }
+      body.scrolled .topbar .wrap {
+        min-height: 28px;
+        height: 28px;
+      }
+      .wordmark img { height: 16px; }
+      nav { gap: 8px; }
+      nav a { font-size: 9px; }
+      body.scrolled nav a { font-size: 7px; }
       .hero { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 72px; }
       .portrait { width: calc(100% - 14px); min-height: 310px; }
       .portrait img { min-height: 310px; }

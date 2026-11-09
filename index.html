@@ -27,6 +27,25 @@
       text-rendering: optimizeLegibility;
     }
 
+    @view-transition { navigation: auto; }
+
+    ::view-transition-old(root) {
+      animation: page-transition-out .16s ease both;
+    }
+
+    ::view-transition-new(root) {
+      animation: page-transition-in .38s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    @keyframes page-transition-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes page-transition-out {
+      to { opacity: 0; }
+    }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin: 0; min-width: 320px; }
@@ -87,8 +106,10 @@
     nav { display: flex; gap: clamp(14px, 2.4vw, 32px); }
     nav a {
       display: inline-block;
+      font-family: "DM Sans", sans-serif;
       font-size: 13px;
       font-weight: 500;
+      line-height: 1.2;
       text-decoration: none;
       transition: transform .18s ease, opacity .18s ease, font-size .2s ease;
       transform-origin: center;
@@ -219,6 +240,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      ::view-transition-old(root),
+      ::view-transition-new(root) { animation: none !important; }
     }
   </style>
 </head>

@@ -281,14 +281,14 @@
 
     .site-footer {
       width: 100%;
-      margin-top: 12px;
-      padding: 6px 0;
+      margin-top: clamp(10px, 1vw, 18px);
+      padding: clamp(6px, .6vw, 12px) 0;
       background: var(--ink);
       color: var(--paper);
     }
 
     .site-footer-inner {
-      width: min(1200px, calc(100% - 40px));
+      width: min(1760px, calc(100% - clamp(40px, 7vw, 128px)));
       margin: 0 auto;
     }
 
@@ -296,38 +296,38 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: clamp(14px, 2vw, 32px);
     }
 
     .footer-copy {
       margin: 0;
       color: inherit;
-      font-size: 12px;
+      font-size: clamp(11px, .8vw, 15px);
     }
 
     .footer-logo {
       display: block;
-      width: 42px;
-      height: 24px;
+      width: clamp(36px, 2.9vw, 56px);
+      height: clamp(20px, 1.5vw, 30px);
       object-fit: contain;
     }
 
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: clamp(6px, .65vw, 12px);
     }
 
     .footer-socials {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: clamp(8px, .75vw, 14px);
     }
 
     .footer-socials a {
       display: inline-flex;
-      width: 16px;
-      height: 16px;
+      width: clamp(14px, 1vw, 20px);
+      height: clamp(14px, 1vw, 20px);
       align-items: center;
       justify-content: center;
       color: var(--paper);

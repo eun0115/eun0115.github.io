@@ -52,7 +52,10 @@
     body { margin: 0; min-width: 320px; }
     a { color: inherit; }
 
-    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .wrap {
+      width: min(1760px, calc(100% - clamp(40px, 7vw, 128px)));
+      margin-inline: auto;
+    }
 
     .topbar {
       position: sticky;
@@ -124,15 +127,16 @@
 
     .hero {
       display: grid;
-      grid-template-columns: 1fr .82fr;
-      gap: clamp(16px, 2.6vw, 36px);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: clamp(28px, 5vw, 110px);
       align-items: center;
-      padding-block: clamp(32px, 6vw, 72px);
+      padding-block: clamp(48px, 6vw, 125px);
     }
 
     .hero > div:first-child,
     .portrait,
     .project { animation: content-enter .45s both; }
+    .hero > div:first-child { min-width: 0; }
     .portrait { animation-delay: .06s; }
     .project:nth-child(2) { animation-delay: .18s; }
     .project:nth-child(3) { animation-delay: .24s; }
@@ -158,16 +162,22 @@
 
     h1, h2, p { margin-top: 0; }
     h1 {
-      max-width: 620px;
+      max-width: 880px;
       margin-bottom: 16px;
       font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(48px, 7.4vw, 88px);
+      font-size: clamp(48px, calc(5.5vw + 16px), 128px);
       font-weight: 500;
       line-height: .9;
     }
 
     h1 em { color: var(--blue-accent); font-weight: 500; }
-    .intro { max-width: 440px; margin: 0 0 30px; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
+    .intro {
+      max-width: 680px;
+      margin: 0 0 30px;
+      color: var(--ink-soft);
+      font-size: clamp(16px, calc(.7vw + 8px), 24px);
+      line-height: 1.65;
+    }
 
     .contact-link {
       display: inline-flex;
@@ -187,8 +197,8 @@
 
     .portrait {
       position: relative;
-      width: min(100%, 420px);
-      min-height: 310px;
+      width: min(100%, 760px);
+      aspect-ratio: 4 / 3;
       margin-inline: auto;
       background: var(--blue);
       isolation: isolate;
@@ -202,7 +212,7 @@
       content: "";
     }
 
-    .portrait img { display: block; width: 100%; height: 100%; min-height: 310px; object-fit: cover; }
+    .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .caption { position: absolute; right: 12px; bottom: 12px; padding: 8px 11px; background: var(--paper); font-size: 11px; }
 
     .work { padding-block: 34px 74px; }
@@ -223,27 +233,27 @@
 
     .site-footer {
       width: 100%;
-      margin-top: 12px;
+      margin-top: clamp(10px, 1vw, 18px);
       background: var(--ink);
       color: var(--paper);
-      padding: 6px 0;
+      padding: clamp(6px, .6vw, 12px) 0;
     }
 
     .site-footer-inner {
-      width: min(1200px, calc(100% - 40px));
+      width: min(1760px, calc(100% - clamp(40px, 7vw, 128px)));
       margin: 0 auto;
     }
 
     .footer-copy {
       margin: 0;
       color: inherit;
-      font-size: 12px;
+      font-size: clamp(11px, .8vw, 15px);
     }
 
     .footer-logo {
       display: block;
-      width: 42px;
-      height: 24px;
+      width: clamp(36px, 2.9vw, 56px);
+      height: clamp(20px, 1.5vw, 30px);
       object-fit: contain;
     }
 
@@ -251,25 +261,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: clamp(14px, 2vw, 32px);
     }
 
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: clamp(6px, .65vw, 12px);
     }
 
     .footer-socials {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: clamp(8px, .75vw, 14px);
     }
 
     .footer-socials a {
       display: inline-flex;
-      width: 16px;
-      height: 16px;
+      width: clamp(14px, 1vw, 20px);
+      height: clamp(14px, 1vw, 20px);
       align-items: center;
       justify-content: center;
       color: var(--paper);
@@ -312,8 +322,8 @@
       nav { gap: 8px; }
       nav a { font-size: 12px; }
       body.scrolled nav a { font-size: 10px; }
-      .hero { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 72px; }
-      .portrait { width: calc(100% - 14px); min-height: 310px; }
+      .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 64px 72px; }
+      .portrait { width: calc(100% - 14px); min-width: 0; min-height: 310px; }
       .portrait img { min-height: 310px; }
       .work { padding-bottom: 54px; }
       .projects { grid-template-columns: 1fr; }

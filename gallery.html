@@ -12,6 +12,7 @@
     :root {
       color-scheme: light;
       --paper: #f4f9ff;
+      --paper-strong: #eaf3ff;
       --ink: #123d5f;
       --ink-soft: #426b8a;
       --blue: #bfe0ff;
@@ -29,7 +30,7 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
-    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .wrap { width: min(1200px, calc(100% - 52px)); margin-inline: auto; }
 
     .topbar {
       position: sticky;
@@ -39,14 +40,24 @@
       background: rgba(244, 249, 255, .72);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      transition: background .2s ease, box-shadow .2s ease;
     }
 
     .topbar .wrap {
-      min-height: 76px;
+      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      transition: min-height .2s ease;
+    }
+
+    body.scrolled .topbar {
+      box-shadow: 0 8px 22px rgba(18, 61, 95, .06);
+    }
+
+    body.scrolled .topbar .wrap {
+      min-height: 36px;
     }
 
     .wordmark {
@@ -54,6 +65,8 @@
       align-items: center;
       justify-content: center;
       line-height: 0;
+      transition: transform .18s ease, opacity .18s ease;
+      transform-origin: center;
     }
 
     .wordmark img {
@@ -67,14 +80,24 @@
       display: inline-block;
       font-size: 13px;
       font-weight: 500;
-      transition: opacity .2s ease;
+      text-decoration: none;
+      transition: opacity .2s ease, transform .18s ease, font-size .2s ease;
+      transform-origin: center;
     }
     nav a:hover { opacity: .8; }
+    nav a:active,
+    nav a:focus-visible {
+      transform: scale(.96);
+    }
 
-    main { padding-block: 52px 80px; }
+    main { padding-block: 46px 80px; }
 
     .intro {
-      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 30px;
       padding-bottom: 18px;
       border-bottom: 1px solid var(--line);
     }
@@ -88,10 +111,22 @@
       color: var(--blue-accent);
     }
 
+    .intro-copy {
+      max-width: 700px;
+    }
+
+    .intro-meta {
+      color: var(--ink-soft);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
     h1 {
       margin: 0;
       font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(36px, 5vw, 64px);
+      font-size: clamp(36px, 4.8vw, 64px);
       font-weight: 500;
       line-height: 1.04;
     }
@@ -99,13 +134,20 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
+      gap: 18px;
     }
 
     .card {
       overflow: hidden;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, .35);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(76, 142, 203, .35);
+      box-shadow: 0 18px 32px rgba(18, 61, 95, .09);
     }
 
     .card img {
@@ -117,25 +159,44 @@
     }
 
     .card-body {
-      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 14px 14px;
     }
 
     .card-tag {
       display: inline-block;
-      margin-bottom: 10px;
-      font-size: 10px;
+      margin-bottom: 8px;
+      font-size: 9px;
       font-weight: 700;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--blue-accent);
     }
 
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 0;
+    }
+
     .card h2 {
-      margin: 0 0 10px;
+      margin: 0;
       font-family: "Fraunces", Georgia, serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 500;
-      line-height: 1.1;
+      line-height: 1.08;
+      flex: 0 1 auto;
+      cursor: pointer;
+    }
+
+    .card h2 + p {
+      margin-top: 0;
+    }
+
+    .card-meta {
+      display: none;
     }
 
     .card p {
@@ -143,6 +204,102 @@
       color: var(--ink-soft);
       font-size: 14px;
       line-height: 1.7;
+    }
+
+    .info-button {
+      display: none;
+    }
+
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(18, 61, 95, .38);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease, visibility .2s ease;
+    }
+
+    .project-modal.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .modal-panel {
+      position: relative;
+      width: min(420px, 100%);
+      max-height: min(70vh, 560px);
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      background: rgba(244, 249, 255, .96);
+      border: 1px solid var(--line);
+      box-shadow: 0 28px 64px rgba(18, 61, 95, .18);
+    }
+
+    .modal-panel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .7);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-copy {
+      padding: 20px 22px 22px;
+    }
+
+    .modal-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+    }
+
+    .modal-copy h3 {
+      margin: 0 0 10px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(26px, 3vw, 32px);
+      font-weight: 500;
+      line-height: 1.08;
+    }
+
+    .modal-copy p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .modal-meta {
+      margin-top: 16px;
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     footer {
@@ -156,13 +313,41 @@
 
     @media (max-width: 700px) {
       .wrap { width: min(100% - 20px, 520px); }
-      .topbar .wrap { min-height: 52px; }
+      .topbar {
+        min-height: 44px;
+        height: 44px;
+      }
+      .topbar .wrap {
+        min-height: 44px;
+        height: 44px;
+        gap: 10px;
+      }
+      body.scrolled .topbar {
+        min-height: 28px;
+        height: 28px;
+      }
+      body.scrolled .topbar .wrap {
+        min-height: 28px;
+        height: 28px;
+      }
       .wordmark img { height: 18px; }
       nav { gap: 8px; }
       nav a { font-size: 11px; }
+      body.scrolled nav a { font-size: 10px; }
       main { padding-top: 28px; }
+      .intro {
+        display: block;
+        margin-bottom: 24px;
+      }
+      .intro-meta {
+        display: block;
+        margin-top: 12px;
+        white-space: normal;
+      }
       .gallery-grid { grid-template-columns: 1fr; }
       .card img { aspect-ratio: 16 / 9; }
+      .modal-panel { max-height: 88vh; }
+      .modal-copy { padding: 22px 20px 26px; }
       footer { flex-direction: column; }
     }
   </style>
@@ -182,71 +367,163 @@
   </header>
 
   <main class="wrap">
-    <section class="intro">
-      <p class="eyebrow">Selected work</p>
-      <h1>Things I’ve made and am still making.</h1>
-    </section>
-
     <section class="gallery-grid" aria-label="Work gallery">
-      <article class="card">
+      <article class="card" data-tag="Brand" data-title="North Studio" data-description="A thoughtful visual identity and portfolio site for a creative studio focused on telling clear stories." data-meta="Brand identity · 2025" data-image="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="People collaborating around a table">
         <div class="card-body">
           <span class="card-tag">Brand</span>
-          <h2>North Studio</h2>
-          <p>A thoughtful visual identity and portfolio site for a creative studio focused on telling clear stories.</p>
+          <div class="card-header">
+            <h2 tabindex="0" aria-label="More information about North Studio">North Studio</h2>
+          </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-tag="Web" data-title="Quiet Signals" data-description="Quiet Signals is an editorial landing page designed to present essays, research, and product thinking in a quieter and more legible rhythm. The system uses generous spacing, soft contrast, and clear typography to create a sense of calm without sacrificing readability." data-meta="Editorial web · 2025" data-image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Laptop and desk workspace with design materials">
         <div class="card-body">
           <span class="card-tag">Web</span>
-          <h2>Quiet Signals</h2>
-          <p>An editorial-style landing page built to showcase research, essays, and product thinking in a calm, readable layout.</p>
+          <div class="card-header">
+            <h2 tabindex="0" aria-label="More information about Quiet Signals">Quiet Signals</h2>
+          </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-tag="Product" data-title="Field Notes" data-description="Field Notes is a product concept for turning everyday observations into a lightweight reflective habit. The project focused on how information could feel more tactile and personal without becoming cluttered or overwhelming." data-meta="UI concept · 2024" data-image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Desk with digital design tools and notes">
         <div class="card-body">
           <span class="card-tag">Product</span>
-          <h2>Field Notes</h2>
-          <p>A prototype for capturing personal observations and ideas in a more tactile, reflective digital format.</p>
+          <div class="card-header">
+            <h2 tabindex="0" aria-label="More information about Field Notes">Field Notes</h2>
+          </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-tag="Strategy" data-title="After Hours" data-description="After Hours explores how personal routines can become meaningful digital stories. It was built as a small concept piece around ritual, reflection, and the idea of making daily practice feel more intentional and shareable." data-meta="Strategy concept · 2024" data-image="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Person working on a laptop in a warm office">
         <div class="card-body">
           <span class="card-tag">Strategy</span>
-          <h2>After Hours</h2>
-          <p>A small digital concept exploring how to turn personal routines into meaningful and shareable stories.</p>
+          <div class="card-header">
+            <h2 tabindex="0" aria-label="More information about After Hours">After Hours</h2>
+          </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-tag="Print" data-title="Soft Systems" data-description="Soft Systems was an experimental print-and-digital system focused on clean typography, subtle rhythm, and soft motion. The goal was to create a visual language that felt minimal, warm, and quietly expressive across multiple formats." data-meta="Print + digital · 2023" data-image="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Minimal interior with soft lights and neutral furniture">
         <div class="card-body">
           <span class="card-tag">Print</span>
-          <h2>Soft Systems</h2>
-          <p>An experimental print-and-digital system exploring clean typography, rhythm, and subtle motion in a modern portfolio.</p>
+          <div class="card-header">
+            <h2 tabindex="0" aria-label="More information about Soft Systems">Soft Systems</h2>
+          </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-tag="Process" data-title="Open Archive" data-description="Open Archive is a personal catalog of references, experiments, and fragments of previous work. It was designed to feel like a living archive—open, curious, and easy to revisit over time." data-meta="Archive concept · 2023" data-image="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=80" alt="Hands working over sketches and a notebook">
         <div class="card-body">
           <span class="card-tag">Process</span>
-          <h2>Open Archive</h2>
-          <p>A personal project cataloging references, experiments, and fragments of work in an intentionally open, living archive.</p>
+          <div class="card-header">
+            <h2 tabindex="0" aria-label="More information about Open Archive">Open Archive</h2>
+          </div>
         </div>
       </article>
     </section>
   </main>
 
+  <div class="project-modal" id="projectModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Close project details">×</button>
+      <div class="modal-copy">
+        <span class="modal-tag" id="modalTag">Brand</span>
+        <h3 id="modalTitle">Project title</h3>
+        <p id="modalDescription">Project description</p>
+        <div class="modal-meta" id="modalMeta">Category · year</div>
+      </div>
+    </div>
+  </div>
+
   <footer class="wrap">
     <p>Made with care, wherever I am.</p>
     <a href="mailto:hello@example.com">hello@example.com</a>
   </footer>
+
+  <script>
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTag = document.getElementById('modalTag');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalMeta = document.getElementById('modalMeta');
+    const closeButton = document.querySelector('.modal-close');
+
+    const updateScrollState = () => {
+      const shouldCompact = window.scrollY > 40;
+      const isCompact = document.body.classList.contains('scrolled');
+
+      if (shouldCompact !== isCompact) {
+        document.body.classList.toggle('scrolled', shouldCompact);
+      }
+    };
+
+    let scrollTick = null;
+    const requestScrollUpdate = () => {
+      if (scrollTick) return;
+      scrollTick = requestAnimationFrame(() => {
+        scrollTick = null;
+        updateScrollState();
+      });
+    };
+
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+    updateScrollState();
+
+    const openProjectModal = (card) => {
+      const tag = card.dataset.tag || 'Project';
+      const title = card.dataset.title || 'Untitled project';
+      const description = card.dataset.description || 'More details coming soon.';
+      const meta = card.dataset.meta || 'Project';
+
+      modalTag.textContent = tag;
+      modalTitle.textContent = title;
+      modalDescription.textContent = description;
+      modalMeta.textContent = meta;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeProjectModal = () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('.card h2').forEach((title) => {
+      const trigger = (event) => {
+        event.preventDefault();
+        const card = title.closest('.card');
+        if (card) openProjectModal(card);
+      };
+
+      title.addEventListener('click', trigger);
+      title.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          trigger(event);
+        }
+      });
+    });
+
+    closeButton.addEventListener('click', closeProjectModal);
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeProjectModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) {
+        closeProjectModal();
+      }
+    });
+  </script>
 </body>
 </html>

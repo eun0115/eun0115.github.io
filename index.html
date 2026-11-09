@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ec">
+  <meta name="description" content="A little corner of the internet for things I'm making, learning, and collecting.">
+  <title>Your Name | Personal Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f4ec;
+      --ink: #193b32;
+      --green: #c9e76b;
+      --coral: #e76d50;
+      --blue: #9dc8db;
+      --line: rgba(25, 59, 50, .24);
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; }
+    a { color: inherit; }
+
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    .topbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wordmark {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-decoration: none;
+    }
+
+    nav { display: flex; gap: clamp(18px, 4vw, 42px); }
+    nav a { font-size: 13px; text-decoration: none; }
+    nav a:hover, .email:hover { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr .82fr;
+      gap: clamp(32px, 7vw, 88px);
+      align-items: center;
+      padding-block: clamp(58px, 10vw, 120px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 22px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before { width: 22px; height: 2px; background: var(--coral); content: ""; }
+
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      max-width: 620px;
+      margin-bottom: 22px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(48px, 7.4vw, 88px);
+      font-weight: 500;
+      line-height: .98;
+    }
+
+    h1 em { color: #b94b35; font-weight: 500; }
+    .intro { max-width: 440px; margin-bottom: 30px; color: #42584f; font-size: 16px; line-height: 1.75; }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 17px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .contact-link:hover { background: #b94b35; transform: translateY(-2px); }
+    .contact-link span { font-size: 17px; line-height: 1; }
+
+    .portrait {
+      position: relative;
+      min-height: 390px;
+      background: var(--green);
+      isolation: isolate;
+    }
+
+    .portrait::before {
+      position: absolute;
+      z-index: -1;
+      inset: 18px -18px -18px 18px;
+      background: var(--coral);
+      content: "";
+    }
+
+    .portrait img { display: block; width: 100%; height: 100%; min-height: 390px; object-fit: cover; }
+    .caption { position: absolute; right: 12px; bottom: 12px; padding: 8px 11px; background: var(--paper); font-size: 11px; }
+
+    .work { padding-block: 34px 74px; }
+    .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); }
+    .section-heading h2 { margin-bottom: 15px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .section-heading p { margin-bottom: 15px; color: #52665d; font-size: 12px; }
+
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .project { padding: 23px 24px 6px 0; }
+    .project + .project { padding-left: 24px; border-left: 1px solid var(--line); }
+    .project-number { display: block; margin-bottom: 22px; color: #b94b35; font-size: 11px; font-weight: 700; }
+    .project h3 { margin: 0 0 8px; font-family: "Fraunces", Georgia, serif; font-size: 23px; font-weight: 500; }
+    .project p { max-width: 290px; margin-bottom: 12px; color: #52665d; font-size: 13px; line-height: 1.65; }
+
+    footer { display: flex; justify-content: space-between; gap: 18px; padding-block: 21px; border-top: 1px solid var(--line); font-size: 12px; }
+    footer p { margin: 0; }
+    .email { text-underline-offset: 3px; }
+
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 36px, 520px); }
+      .topbar { min-height: 66px; }
+      nav { gap: 16px; }
+      nav a { font-size: 12px; }
+      .hero { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 72px; }
+      .portrait { width: calc(100% - 14px); min-height: 310px; }
+      .portrait img { min-height: 310px; }
+      .work { padding-bottom: 54px; }
+      .projects { grid-template-columns: 1fr; }
+      .project, .project + .project { padding: 20px 0; border-left: 0; }
+      .project + .project { border-top: 1px solid var(--line); }
+      .project-number { margin-bottom: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="wordmark" href="#home">YOUR NAME</a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#work">Things I make</a>
+      <a href="#contact">Say hello</a>
+    </nav>
+  </header>
+
+  <main id="home" class="wrap">
+    <section class="hero" id="about" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow">A small corner of the internet</p>
+        <h1 id="intro-title">Making room for <em>good ideas.</em></h1>
+        <p class="intro">Hi, I’m Your Name. I’m a [your role] who likes turning curious questions into thoughtful work. This is where I keep a few things I’ve made and what I’m exploring next.</p>
+        <a class="contact-link" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="portrait">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1100&q=85" alt="Paintbrushes and colorful art supplies on a studio table">
+        <span class="caption">Currently making a little mess</span>
+      </div>
+    </section>
+
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <h2 id="work-title">A few things I make</h2>
+        <p>Selected projects · 2024—2026</p>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <span class="project-number">01 / THE WEB</span>
+          <h3>A project title</h3>
+          <p>A sentence about a website, app, or idea you brought to life.</p>
+        </article>
+        <article class="project">
+          <span class="project-number">02 / ON PAPER</span>
+          <h3>Another good thing</h3>
+          <p>A little context on what it is and why you enjoyed making it.</p>
+        </article>
+        <article class="project">
+          <span class="project-number">03 / IN PROGRESS</span>
+          <h3>Something new</h3>
+          <p>Leave a breadcrumb for the next thing you’re curious about.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap" id="contact">
+    <p>Made with care, wherever I am.</p>
+    <a class="email" href="mailto:hello@example.com">hello@example.com</a>
+  </footer>
+</body>
+</html>

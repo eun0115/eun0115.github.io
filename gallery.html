@@ -52,7 +52,7 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
-    .wrap { width: min(1200px, calc(100% - 52px)); margin-inline: auto; }
+    .wrap { width: calc(100% - clamp(40px, 7vw, 128px)); margin-inline: auto; }
 
     .topbar {
       position: sticky;
@@ -66,7 +66,9 @@
     }
 
     .topbar .wrap {
-      width: min(1120px, calc(100% - 48px));
+      width: min(1760px, calc(100vw - clamp(40px, 7vw, 128px)));
+      position: relative;
+      left: calc((100vw - 100%) / 2);
       min-height: 76px;
       display: flex;
       align-items: center;
@@ -87,10 +89,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
       line-height: 0;
       transition: transform .18s ease, opacity .18s ease;
       transform-origin: center;
     }
+
+    .wordmark:hover { opacity: .88; }
+    .wordmark:active,
+    .wordmark:focus-visible { transform: scale(.94); }
 
     .wordmark img {
       display: block;
@@ -106,10 +113,10 @@
       font-weight: 500;
       line-height: 1.2;
       text-decoration: none;
-      transition: opacity .2s ease, transform .18s ease, font-size .2s ease;
+      transition: transform .18s ease, opacity .18s ease, font-size .2s ease;
       transform-origin: center;
     }
-    nav a:hover { opacity: .8; }
+    nav a:hover { text-decoration-thickness: 2px; text-underline-offset: 4px; }
     nav a:active,
     nav a:focus-visible {
       transform: scale(.96);
@@ -158,8 +165,8 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: clamp(12px, 1.4vw, 18px);
     }
 
     .card {
@@ -187,6 +194,7 @@
     .card-body {
       display: flex;
       flex-direction: column;
+      min-width: 0;
       padding: 12px 14px 14px;
       animation: content-enter .45s both;
     }
@@ -245,6 +253,7 @@
       font-weight: 500;
       line-height: 1.08;
       flex: 0 1 auto;
+      overflow-wrap: anywhere;
     }
 
     .card h2 + p {
@@ -264,10 +273,6 @@
 
     .info-button {
       display: none;
-    }
-
-    @media (max-width: 1000px) {
-      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     footer {
@@ -354,7 +359,7 @@
         height: 44px;
       }
       .topbar .wrap {
-        width: min(100% - 20px, 520px);
+        width: min(calc(100vw - 20px), 520px);
         min-height: 44px;
         height: 44px;
         gap: 10px;
@@ -381,7 +386,6 @@
         margin-top: 12px;
         white-space: normal;
       }
-      .gallery-grid { grid-template-columns: 1fr; }
       .card img { aspect-ratio: 16 / 9; }
       footer { flex-direction: column; }
     }

@@ -69,6 +69,9 @@
     }
 
     .topbar .wrap {
+      width: min(1760px, calc(100vw - clamp(40px, 7vw, 128px)));
+      position: relative;
+      left: calc((100vw - 100%) / 2);
       min-height: 76px;
       display: flex;
       align-items: center;
@@ -232,6 +235,7 @@
     .email { text-underline-offset: 3px; }
 
     .site-footer {
+      display: none;
       width: 100%;
       margin-top: clamp(10px, 1vw, 18px);
       background: var(--ink);
@@ -310,6 +314,12 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        padding-bottom: clamp(16px, 2vh, 24px);
+      }
+
+      .topbar,
+      .site-footer {
+        flex-shrink: 0;
       }
 
       main#home {
@@ -318,12 +328,37 @@
     }
 
     @media (min-width: 701px) and (max-height: 760px) {
+      body { padding-bottom: 36px; }
+
       .hero {
         padding-block: clamp(18px, 3vh, 30px);
       }
 
       .portrait {
         width: min(100%, 760px, 55vh);
+      }
+    }
+
+    @media (min-width: 701px) and (max-height: 540px) {
+      .hero {
+        gap: 24px;
+        padding-block: 12px;
+      }
+
+      .eyebrow { margin-bottom: 12px; }
+      h1 {
+        margin-bottom: 10px;
+        font-size: clamp(42px, 6vh, 58px);
+      }
+
+      .intro {
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .portrait {
+        width: min(100%, 55vh);
       }
     }
 
@@ -334,6 +369,7 @@
         height: 44px;
       }
       .topbar .wrap {
+        width: min(calc(100vw - 20px), 520px);
         min-height: 44px;
         height: 44px;
         gap: 10px;

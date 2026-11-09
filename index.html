@@ -35,11 +35,31 @@
     .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 
     .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(244, 249, 255, .72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background .2s ease, box-shadow .2s ease;
+    }
+
+    .topbar .wrap {
       min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+      gap: 20px;
+      transition: min-height .2s ease;
+    }
+
+    body.scrolled .topbar {
+      box-shadow: 0 8px 22px rgba(18, 61, 95, .06);
+    }
+
+    body.scrolled .topbar .wrap {
+      min-height: 36px;
     }
 
     .wordmark {
@@ -48,6 +68,14 @@
       justify-content: center;
       text-decoration: none;
       line-height: 0;
+      transition: transform .18s ease, opacity .18s ease;
+      transform-origin: center;
+    }
+
+    .wordmark:hover { opacity: .88; }
+    .wordmark:active,
+    .wordmark:focus-visible {
+      transform: scale(.94);
     }
 
     .wordmark img {
@@ -56,16 +84,30 @@
       width: auto;
     }
 
-    nav { display: flex; gap: clamp(18px, 4vw, 42px); }
-    nav a { font-size: 13px; text-decoration: none; }
+    nav { display: flex; gap: clamp(14px, 2.4vw, 32px); }
+    nav a {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: none;
+      transition: transform .18s ease, opacity .18s ease, font-size .2s ease;
+      transform-origin: center;
+    }
+
+    body.scrolled nav a {
+      font-size: 10px;
+    }
     nav a:hover, .email:hover { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    nav a:active,
+    nav a:focus-visible {
+      transform: scale(.96);
+    }
 
     .hero {
       display: grid;
       grid-template-columns: 1fr .82fr;
-      gap: clamp(32px, 7vw, 88px);
+      gap: clamp(24px, 5vw, 60px);
       align-items: center;
-      padding-block: clamp(58px, 10vw, 120px);
+      padding-block: clamp(32px, 6vw, 72px);
     }
 
     .eyebrow {
@@ -165,15 +207,17 @@
   </style>
 </head>
 <body>
-  <header class="topbar wrap">
-    <a class="wordmark" href="#home" aria-label="Home">
-      <img src="assets/logo.svg" alt="Logo" />
-    </a>
-    <nav aria-label="Main navigation">
-      <a href="#about">Home</a>
-      <a href="#work">Gallery</a>
-      <a href="#contact">Contact Us</a>
-    </nav>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="wordmark" href="#home" aria-label="Home">
+        <img src="assets/logo.svg" alt="Logo" />
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#about">Home</a>
+        <a href="#work">Gallery</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </div>
   </header>
 
   <main id="home" class="wrap">
@@ -219,5 +263,14 @@
     <p>Made with care, wherever I am.</p>
     <a class="email" href="mailto:hello@example.com">hello@example.com</a>
   </footer>
+
+  <script>
+    const toggleScrolledClass = () => {
+      document.body.classList.toggle('scrolled', window.scrollY > 12);
+    };
+
+    window.addEventListener('scroll', toggleScrolledClass, { passive: true });
+    toggleScrolledClass();
+  </script>
 </body>
 </html>

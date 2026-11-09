@@ -486,45 +486,27 @@
 
   <main class="wrap">
     <section class="gallery-grid" aria-label="Planespotting gallery">
-      <article class="card" data-tag="Approach" data-title="Final Approach" data-description="An airliner descends toward the runway, framed by the landscape beyond the airport perimeter." data-meta="Arrival · Aviation">
-        <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=900&q=85" alt="Airliner approaching a runway with mountains in the distance">
+      <article class="card" data-tag="9V-SCI" data-title="Singapore Airlines Boeing 787-10" data-modal-title="A Singaporean Beauty Approaching Manila's Runway 24" data-description="AIRLINE: @singaporeair | REGISTRATION: 9V-SCI | AIRCRAFT: @boeing 787-10 Dreamliner" data-meta="Arrival · Manila">
+        <img src="img/9V-SCI.jpg" alt="Singapore Airlines Boeing 787-10 Dreamliner 9V-SCI approaching Manila runway 24">
         <div class="card-body">
-          <span class="card-tag">Approach</span>
+          <span class="card-tag">9V-SCI</span>
           <div class="card-header">
-            <h2 tabindex="0" aria-label="More information about Final Approach">Final Approach</h2>
+            <h2 tabindex="0" aria-label="More information about Singapore Airlines Boeing 787-10">Singapore Airlines Boeing 787-10</h2>
           </div>
         </div>
       </article>
 
-      <article class="card" data-tag="At the airport" data-title="On Stand" data-description="A quiet pause at the gate, with the aircraft framed by the terminal and the last light of the day." data-meta="At the airport · Aviation">
-        <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=900&q=85" alt="Passenger aircraft parked at a terminal at sunset">
+      <!-- Copy this template for a new post and replace each placeholder.
+      <article class="card" data-tag="REGISTRATION" data-title="Card title" data-modal-title="Popup title" data-description="AIRLINE: @airline | REGISTRATION: REGISTRATION | AIRCRAFT: Aircraft model" data-meta="Arrival · Airport">
+        <img src="img/IMAGE-FILENAME.jpg" alt="Describe the aircraft and scene">
         <div class="card-body">
-          <span class="card-tag">At the airport</span>
+          <span class="card-tag">REGISTRATION</span>
           <div class="card-header">
-            <h2 tabindex="0" aria-label="More information about On Stand">On Stand</h2>
+            <h2 tabindex="0" aria-label="More information about Card title">Card title</h2>
           </div>
         </div>
       </article>
-
-      <article class="card" data-tag="Golden hour" data-title="Last Light" data-description="Warm evening light catches an aircraft on the apron, turning an ordinary wait into a moment worth remembering." data-meta="Golden hour · Aviation">
-        <img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=900&q=85" alt="Private jet on the runway in golden evening light">
-        <div class="card-body">
-          <span class="card-tag">Golden hour</span>
-          <div class="card-header">
-            <h2 tabindex="0" aria-label="More information about Last Light">Last Light</h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="card" data-tag="In flight" data-title="Above the Clouds" data-description="A view from the cabin: wing, cloud tops, and the changing color of the sky at altitude." data-meta="In flight · Aviation">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=85" alt="Airplane wing above clouds at sunset">
-        <div class="card-body">
-          <span class="card-tag">In flight</span>
-          <div class="card-header">
-            <h2 tabindex="0" aria-label="More information about Above the Clouds">Above the Clouds</h2>
-          </div>
-        </div>
-      </article>
+      -->
     </section>
   </main>
 
@@ -600,7 +582,7 @@
 
     const openProjectModal = (card) => {
       const tag = card.dataset.tag || 'Project';
-      const title = card.dataset.title || 'Untitled project';
+      const title = card.dataset.modalTitle || card.dataset.title || 'Untitled project';
       const description = card.dataset.description || 'More details coming soon.';
       const meta = card.dataset.meta || 'Project';
 

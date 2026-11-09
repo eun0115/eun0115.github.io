@@ -115,7 +115,7 @@
       transform: scale(.96);
     }
 
-    main { padding-block: 46px 80px; }
+    main { padding-block: clamp(10px, 1.5vw, 22px) 80px; }
 
     .intro {
       display: flex;
@@ -378,7 +378,7 @@
       nav { gap: 8px; }
       nav a { font-size: 12px; }
       body.scrolled nav a { font-size: 10px; }
-      main { padding-top: 28px; }
+      main { padding-top: clamp(10px, 3.5vw, 18px); }
       .intro {
         display: block;
         margin-bottom: 24px;

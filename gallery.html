@@ -158,7 +158,7 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -224,6 +224,20 @@
       margin-bottom: 0;
     }
 
+    .card-header-stack {
+      display: grid;
+      justify-items: start;
+      gap: 4px;
+    }
+
+    .card-subtitle {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
     .card h2 {
       margin: 0;
       font-family: "Fraunces", Georgia, serif;
@@ -231,7 +245,6 @@
       font-weight: 500;
       line-height: 1.08;
       flex: 0 1 auto;
-      cursor: pointer;
     }
 
     .card h2 + p {
@@ -253,96 +266,8 @@
       display: none;
     }
 
-    .project-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(18, 61, 95, .38);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .2s ease, visibility .2s ease;
-    }
-
-    .project-modal.open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .modal-panel {
-      position: relative;
-      width: min(420px, 100%);
-      max-height: min(70vh, 560px);
-      overflow: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      background: rgba(244, 249, 255, .96);
-      border: 1px solid var(--line);
-      box-shadow: 0 28px 64px rgba(18, 61, 95, .18);
-    }
-
-    .modal-panel::-webkit-scrollbar {
-      display: none;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .7);
-      color: var(--ink);
-      font-size: 18px;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    .modal-copy {
-      padding: 20px 22px 22px;
-    }
-
-    .modal-tag {
-      display: inline-block;
-      margin-bottom: 12px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--blue-accent);
-    }
-
-    .modal-copy h3 {
-      margin: 0 0 10px;
-      font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(26px, 3vw, 32px);
-      font-weight: 500;
-      line-height: 1.08;
-    }
-
-    .modal-copy p {
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .modal-meta {
-      margin-top: 16px;
-      color: var(--ink);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
+    @media (max-width: 1000px) {
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     footer {
@@ -458,8 +383,6 @@
       }
       .gallery-grid { grid-template-columns: 1fr; }
       .card img { aspect-ratio: 16 / 9; }
-      .modal-panel { max-height: 88vh; }
-      .modal-copy { padding: 22px 20px 26px; }
       footer { flex-direction: column; }
     }
 
@@ -485,28 +408,80 @@
   </header>
 
   <main class="wrap">
-    <section class="gallery-grid" aria-label="Planespotting gallery">
-      <article class="card" data-tag="9V-SCI" data-title="Singapore Airlines Boeing 787-10" data-modal-title="A Singaporean Beauty Approaching Manila's Runway 24" data-description="AIRLINE: @singaporeair | REGISTRATION: 9V-SCI | AIRCRAFT: @boeing 787-10 Dreamliner" data-meta="Arrival · Manila">
-        <img src="img/9V-SCI.jpg" alt="Singapore Airlines Boeing 787-10 Dreamliner 9V-SCI approaching Manila runway 24">
+    <section class="gallery-grid">
+      
+      <article class="card">
+        <img src="img/RP-C3901.jpg">
         <div class="card-body">
-          <span class="card-tag">9V-SCI</span>
+          <span class="card-tag">RP-C3901</span>
           <div class="card-header">
-            <h2 tabindex="0" aria-label="More information about Singapore Airlines Boeing 787-10">Singapore Airlines Boeing 787-10</h2>
+            <h2 tabindex="0">Cebu Pacific Airbus A330-900</h2>
+          </div>
+        </div>
+      </article>
+        
+      <article class="card">
+        <img src="img/RP-C4101.jpg">
+        <div class="card-body">
+          <span class="card-tag">RP-C4101</span>
+          <div class="card-header">
+            <h2 tabindex="0">Cebu Pacific Airbus A320-200</h2>
+          </div>
+        </div>
+      </article>
+  
+      <article class="card">
+        <img src="img/JA894A.jpg">
+        <div class="card-body">
+          <span class="card-tag">JA894A</span>
+          <div class="card-header">
+            <h2 tabindex="0">All Nippon Airways Boeing 787-9 Dreamliner</h2>
           </div>
         </div>
       </article>
 
-      <!-- Copy this template for a new post and replace each placeholder.
-      <article class="card" data-tag="REGISTRATION" data-title="Card title" data-modal-title="Popup title" data-description="AIRLINE: @airline | REGISTRATION: REGISTRATION | AIRCRAFT: Aircraft model" data-meta="Arrival · Airport">
-        <img src="img/IMAGE-FILENAME.jpg" alt="Describe the aircraft and scene">
+      <article class="card">
+        <img src="img/9V-SCI.jpg">
         <div class="card-body">
-          <span class="card-tag">REGISTRATION</span>
+          <span class="card-tag">9V-SCI</span>
           <div class="card-header">
-            <h2 tabindex="0" aria-label="More information about Card title">Card title</h2>
+            <h2 tabindex="0">Singapore Airlines Boeing 787-10 Dreamliner</h2>
           </div>
         </div>
       </article>
-      -->
+
+      <article class="card">
+        <img src="img/RP-C4102.jpg">
+        <div class="card-body">
+          <span class="card-tag">RP-C4102</span>
+          <div class="card-header">
+            <h2 tabindex="0">Cebu Pacific Airbus A320-200</h2>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="img/RP-C8963.jpg">
+        <div class="card-body">
+          <span class="card-tag">RP-C8963</span>
+          <div class="card-header card-header-stack">
+            <h2 tabindex="0">AirAsia Airbus A320-200</h2>
+            <h4 class="card-subtitle">Operated by Philippines AirAsia</h4>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="img/RP-C8611.jpg">
+        <div class="card-body">
+          <span class="card-tag">RP-C8611</span>
+          <div class="card-header card-header-stack">
+            <h2 tabindex="0">Philippine Airlines Airbus A320-200</h2>
+            <h4 class="card-subtitle">Operated by PAL Express</h4>
+          </div>
+        </div>
+      </article>
+
     </section>
   </main>
 
@@ -535,26 +510,7 @@
     </div>
   </footer>
 
-  <div class="project-modal" id="projectModal" aria-hidden="true">
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" type="button" aria-label="Close project details">×</button>
-      <div class="modal-copy">
-        <span class="modal-tag" id="modalTag">Brand</span>
-        <h3 id="modalTitle">Project title</h3>
-        <p id="modalDescription">Project description</p>
-        <div class="modal-meta" id="modalMeta">Category · year</div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const modal = document.getElementById('projectModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalTag = document.getElementById('modalTag');
-    const modalDescription = document.getElementById('modalDescription');
-    const modalMeta = document.getElementById('modalMeta');
-    const closeButton = document.querySelector('.modal-close');
-
     const updateScrollState = () => {
       const isCompact = document.body.classList.contains('scrolled');
       const collapseDistance = window.innerWidth <= 700 ? 16 : 40;
@@ -580,54 +536,6 @@
     window.addEventListener('scroll', requestScrollUpdate, { passive: true });
     updateScrollState();
 
-    const openProjectModal = (card) => {
-      const tag = card.dataset.tag || 'Project';
-      const title = card.dataset.modalTitle || card.dataset.title || 'Untitled project';
-      const description = card.dataset.description || 'More details coming soon.';
-      const meta = card.dataset.meta || 'Project';
-
-      modalTag.textContent = tag;
-      modalTitle.textContent = title;
-      modalDescription.textContent = description;
-      modalMeta.textContent = meta;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    };
-
-    const closeProjectModal = () => {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    };
-
-    document.querySelectorAll('.card h2').forEach((title) => {
-      const trigger = (event) => {
-        event.preventDefault();
-        const card = title.closest('.card');
-        if (card) openProjectModal(card);
-      };
-
-      title.addEventListener('click', trigger);
-      title.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          trigger(event);
-        }
-      });
-    });
-
-    closeButton.addEventListener('click', closeProjectModal);
-
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) closeProjectModal();
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('open')) {
-        closeProjectModal();
-      }
-    });
   </script>
 </body>
 </html>

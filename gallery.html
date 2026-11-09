@@ -180,14 +180,14 @@
       height: auto;
       object-fit: cover;
       display: block;
-      animation: gallery-content-enter .45s both;
+      animation: content-enter .45s both;
     }
 
     .card-body {
       display: flex;
       flex-direction: column;
       padding: 12px 14px 14px;
-      animation: gallery-content-enter .45s both;
+      animation: content-enter .45s both;
     }
 
     .card:nth-child(2) img,
@@ -201,7 +201,7 @@
     .card:nth-child(6) img,
     .card:nth-child(6) .card-body { animation-delay: .3s; }
 
-    @keyframes gallery-content-enter {
+    @keyframes content-enter {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
@@ -411,7 +411,7 @@
       <nav aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="gallery.html">Gallery</a>
-        <a href="mailto:hello@example.com">Contact Us</a>
+        <a href="contact.html">About</a>
       </nav>
     </div>
   </header>
@@ -491,11 +491,6 @@
       </div>
     </div>
   </div>
-
-  <footer class="wrap">
-    <p>Made with care, wherever I am.</p>
-    <a href="mailto:hello@example.com">hello@example.com</a>
-  </footer>
 
   <script>
     const modal = document.getElementById('projectModal');

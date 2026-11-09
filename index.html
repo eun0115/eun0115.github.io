@@ -129,6 +129,19 @@
       padding-block: clamp(32px, 6vw, 72px);
     }
 
+    .hero > div:first-child,
+    .portrait,
+    .project { animation: content-enter .45s both; }
+    .portrait { animation-delay: .06s; }
+    .project:nth-child(2) { animation-delay: .18s; }
+    .project:nth-child(3) { animation-delay: .24s; }
+    .project:nth-child(4) { animation-delay: .3s; }
+
+    @keyframes content-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .eyebrow {
       display: flex;
       align-items: center;
@@ -240,6 +253,9 @@
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .hero > div:first-child,
+      .portrait,
+      .project { animation: none; }
       ::view-transition-old(root),
       ::view-transition-new(root) { animation: none !important; }
     }
@@ -254,7 +270,7 @@
       <nav aria-label="Main navigation">
         <a href="#about">Home</a>
         <a href="gallery.html">Gallery</a>
-        <a href="#contact">Contact Us</a>
+        <a href="contact.html">About</a>
       </nav>
     </div>
   </header>
@@ -265,7 +281,7 @@
         <p class="eyebrow">A small corner of the internet</p>
         <h1 id="intro-title">Making room for <em>good ideas.</em></h1>
         <p class="intro">Hi, I’m Your Name. I’m a [your role] who likes turning curious questions into thoughtful work. This is where I keep a few things I’ve made and what I’m exploring next.</p>
-        <a class="contact-link" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+        <a class="contact-link" href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
       </div>
       <div class="portrait">
         <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1100&q=85" alt="Paintbrushes and colorful art supplies on a studio table">
@@ -297,11 +313,6 @@
       </div>
     </section>
   </main>
-
-  <footer class="wrap" id="contact">
-    <p>Made with care, wherever I am.</p>
-    <a class="email" href="mailto:hello@example.com">hello@example.com</a>
-  </footer>
 
   <script>
     const syncNavState = () => {

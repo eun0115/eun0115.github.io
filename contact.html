@@ -190,8 +190,12 @@
 
   <script>
     const syncNavState = () => {
-      const shouldCompact = window.scrollY > 40;
       const isCompact = document.body.classList.contains('scrolled');
+      const collapseDistance = window.innerWidth <= 700 ? 16 : 40;
+      const canCompact = document.documentElement.scrollHeight - window.innerHeight > collapseDistance + 8;
+      const shouldCompact = isCompact
+        ? window.scrollY >= 8
+        : window.scrollY > 40 && canCompact;
 
       if (shouldCompact !== isCompact) {
         document.body.classList.toggle('scrolled', shouldCompact);

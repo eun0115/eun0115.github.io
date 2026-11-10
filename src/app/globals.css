@@ -72,7 +72,7 @@ body:has(.page-gallery),
 }
 
 .page-contact > main.wrap {
-  width: min(1120px, calc(100% - 48px));
+  width: min(1760px, calc(100% - clamp(40px, 7vw, 128px)));
   margin-inline: auto;
   flex: 1;
 }
@@ -223,9 +223,10 @@ body.scrolled .topbar .wrap {
 }
 
 /* =========================================
-   HOME PAGE (.page-home)
+   HOME & ABOUT PAGES (.page-home, .page-contact)
    ========================================= */
-.page-home main#home {
+.page-home main#home,
+.page-contact main#contact {
   flex: 1;
   min-height: 0;
   display: flex;
@@ -234,11 +235,15 @@ body.scrolled .topbar .wrap {
 
 .page-home h1,
 .page-home h2,
-.page-home p {
+.page-home p,
+.page-contact h1,
+.page-contact h2,
+.page-contact p {
   margin-top: 0;
 }
 
-.page-home .hero {
+.page-home .hero,
+.page-contact .hero {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
@@ -249,17 +254,22 @@ body.scrolled .topbar .wrap {
 
 .page-home .hero > div:first-child,
 .page-home .portrait,
-.page-home .project {
+.page-home .project,
+.page-contact .hero > div:first-child,
+.page-contact .portrait {
   animation: content-enter .45s both;
 }
 
-.page-home .hero > div:first-child { min-width: 0; }
-.page-home .portrait { animation-delay: .06s; }
+.page-home .hero > div:first-child,
+.page-contact .hero > div:first-child { min-width: 0; }
+.page-home .portrait,
+.page-contact .portrait { animation-delay: .06s; }
 .page-home .project:nth-child(2) { animation-delay: .18s; }
 .page-home .project:nth-child(3) { animation-delay: .24s; }
 .page-home .project:nth-child(4) { animation-delay: .3s; }
 
-.page-home .eyebrow {
+.page-home .eyebrow,
+.page-contact .eyebrow {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -270,14 +280,16 @@ body.scrolled .topbar .wrap {
   text-transform: uppercase;
 }
 
-.page-home .eyebrow::before {
+.page-home .eyebrow::before,
+.page-contact .eyebrow::before {
   width: 22px;
   height: 2px;
   background: var(--blue-accent);
   content: "";
 }
 
-.page-home h1 {
+.page-home h1,
+.page-contact h1 {
   max-width: 880px;
   margin-bottom: clamp(12px, 1.8dvh, 18px);
   font-family: "Fraunces", Georgia, serif;
@@ -286,17 +298,23 @@ body.scrolled .topbar .wrap {
   line-height: .92;
 }
 
-.page-home h1 em {
+.page-home h1 em,
+.page-contact h1 em {
   color: var(--blue-accent);
   font-weight: 500;
 }
 
-.page-home .intro {
+.page-home .intro,
+.page-contact .intro {
   max-width: 680px;
   margin: 0;
   color: var(--ink-soft);
   font-size: clamp(15px, min(calc(.65vw + 8px), 2.3dvh), 22px);
   line-height: 1.6;
+}
+
+.page-contact .intro {
+  margin-bottom: clamp(18px, 2.5dvh, 30px);
 }
 
 .page-home .contact-link {
@@ -322,7 +340,8 @@ body.scrolled .topbar .wrap {
   line-height: 1;
 }
 
-.page-home .portrait {
+.page-home .portrait,
+.page-contact .portrait {
   position: relative;
   width: min(100%, 720px, calc((100dvh - 210px) * 4 / 3));
   aspect-ratio: 4 / 3;
@@ -333,7 +352,8 @@ body.scrolled .topbar .wrap {
   isolation: isolate;
 }
 
-.page-home .portrait::before {
+.page-home .portrait::before,
+.page-contact .portrait::before {
   position: absolute;
   z-index: -1;
   inset: 18px -18px -18px 18px;
@@ -341,14 +361,16 @@ body.scrolled .topbar .wrap {
   content: "";
 }
 
-.page-home .portrait img {
+.page-home .portrait img,
+.page-contact .portrait img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.page-home .caption {
+.page-home .caption,
+.page-contact .caption {
   position: absolute;
   right: 12px;
   bottom: 12px;
@@ -360,12 +382,15 @@ body.scrolled .topbar .wrap {
 /* Lock viewport height on wide screens when height is sufficient for 2-column hero */
 @media (min-width: 961px) and (min-height: 520px) {
   html:has(.page-home),
-  body:has(.page-home) {
+  body:has(.page-home),
+  html:has(.page-contact),
+  body:has(.page-contact) {
     height: 100dvh;
     overflow: hidden;
   }
 
-  .page-home {
+  .page-home,
+  .page-contact {
     height: 100dvh;
   }
 }
@@ -489,40 +514,6 @@ body.scrolled .topbar .wrap {
 /* =========================================
    CONTACT / ABOUT PAGE (.page-contact)
    ========================================= */
-.page-contact main {
-  display: grid;
-  align-content: center;
-  padding-block: clamp(40px, 6dvh, 80px);
-  animation: content-enter .45s both;
-}
-
-.page-contact .contact-content { max-width: 760px; }
-
-.page-contact .eyebrow {
-  margin: 0 0 18px;
-  color: var(--blue-accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.page-contact h1 {
-  margin: 0 0 20px;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(42px, 7vw, 88px);
-  font-weight: 500;
-  line-height: .98;
-}
-
-.page-contact .contact-copy {
-  max-width: 480px;
-  margin: 0 0 30px;
-  color: var(--ink-soft);
-  font-size: 16px;
-  line-height: 1.75;
-}
-
 .page-contact .email-link {
   display: inline-flex;
   align-items: center;
@@ -555,21 +546,25 @@ body.scrolled .topbar .wrap {
     width: calc(100% - clamp(32px, 6vw, 64px));
   }
 
-  .page-home .hero {
+  .page-home .hero,
+  .page-contact .hero {
     grid-template-columns: minmax(0, 1fr);
     gap: clamp(28px, 4dvh, 44px);
     padding-block: clamp(28px, 4.5dvh, 56px);
   }
 
-  .page-home h1 {
+  .page-home h1,
+  .page-contact h1 {
     font-size: clamp(42px, 8vw, 76px);
   }
 
-  .page-home .intro {
+  .page-home .intro,
+  .page-contact .intro {
     font-size: clamp(16px, 2.2vw, 20px);
   }
 
-  .page-home .portrait {
+  .page-home .portrait,
+  .page-contact .portrait {
     width: min(calc(100% - 18px), 640px);
     margin-inline: 0 auto;
   }
@@ -613,30 +608,35 @@ body.scrolled .topbar .wrap {
   .topbar nav a { font-size: 12px; }
   body.scrolled .topbar nav a { font-size: 10px; }
 
-  /* Home mobile */
-  .page-home .hero {
+  /* Home & Contact mobile */
+  .page-home .hero,
+  .page-contact .hero {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
     padding-block: clamp(24px, 4dvh, 48px);
   }
 
-  .page-home h1 {
+  .page-home h1,
+  .page-contact h1 {
     font-size: clamp(38px, 11vw, 56px);
   }
 
-  .page-home .intro {
+  .page-home .intro,
+  .page-contact .intro {
     font-size: 15px;
     line-height: 1.6;
   }
 
-  .page-home .portrait {
+  .page-home .portrait,
+  .page-contact .portrait {
     width: calc(100% - 14px);
     min-width: 0;
     margin-bottom: 14px;
     margin-right: 14px;
   }
 
-  .page-home .portrait::before {
+  .page-home .portrait::before,
+  .page-contact .portrait::before {
     inset: 14px -14px -14px 14px;
   }
 
@@ -645,10 +645,6 @@ body.scrolled .topbar .wrap {
   .page-gallery .card img { aspect-ratio: 16 / 9; }
 
   /* Contact mobile */
-  .page-contact main {
-    padding-block: 48px;
-  }
-  .page-contact h1 { font-size: clamp(38px, 11vw, 60px); }
   .page-contact .email-link { font-size: 16px; }
 }
 
@@ -664,9 +660,10 @@ body.scrolled .topbar .wrap {
   .page-home .hero > div:first-child,
   .page-home .portrait,
   .page-home .project,
+  .page-contact .hero > div:first-child,
+  .page-contact .portrait,
   .page-gallery .card img,
-  .page-gallery .card-body,
-  .page-contact main {
+  .page-gallery .card-body {
     animation: none !important;
   }
 

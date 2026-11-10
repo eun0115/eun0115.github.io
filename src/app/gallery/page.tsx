@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { galleryItems } from '@/data/gallery';
 
 export const metadata: Metadata = {
-  title: 'eun0115 | Spotting Gallery',
+  title: 'eun0115 | Gallery',
 };
 
 export default function GalleryPage() {

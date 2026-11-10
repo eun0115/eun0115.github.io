@@ -14,12 +14,15 @@ export default function GalleryPage() {
 
       <main className="wrap">
         <section className="gallery-grid">
-          {galleryItems.map((item) => (
-            <article className="card" key={item.src}>
+          {galleryItems.map((item, index) => (
+            <article className="card" key={item.thumb}>
               <img
-                src={item.src}
+                src={item.thumb}
+                srcSet={item.thumbSrcSet}
+                sizes="(max-width: 700px) min(calc(100vw - 20px), 520px), (max-width: 1200px) 33vw, 340px"
                 alt={`${item.airline} - ${item.tag}`}
-                loading="lazy"
+                loading={index < 8 ? 'eager' : 'lazy'}
+                decoding="async"
               />
               <div className="card-body">
                 <span className="card-tag">{item.tag}</span>

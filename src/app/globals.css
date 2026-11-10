@@ -432,6 +432,8 @@ body.scrolled .topbar .wrap {
   height: auto;
   object-fit: cover;
   display: block;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   animation: content-enter .45s both;
 }
 

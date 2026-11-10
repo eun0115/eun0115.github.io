@@ -44,11 +44,19 @@ html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; }
 a { color: inherit; }
 
-/* Page backgrounds */
+/* Page backgrounds & full-height flex containers */
+.page-home,
+.page-gallery,
+.page-contact {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 body:has(.page-gallery),
 .page-gallery {
   background: linear-gradient(180deg, #f4f9ff 0%, #edf6ff 100%);
-  min-height: 100vh;
 }
 
 /* Base wrap per page */
@@ -60,11 +68,13 @@ body:has(.page-gallery),
 .page-gallery > main.wrap {
   width: calc(100% - clamp(40px, 7vw, 128px));
   margin-inline: auto;
+  flex: 1;
 }
 
 .page-contact > main.wrap {
   width: min(1120px, calc(100% - 48px));
   margin-inline: auto;
+  flex: 1;
 }
 
 /* Shared Topbar */
@@ -72,6 +82,7 @@ body:has(.page-gallery),
   position: sticky;
   top: 0;
   z-index: 20;
+  flex-shrink: 0;
   border-bottom: 1px solid var(--line);
   background: rgba(244, 249, 255, .72);
   backdrop-filter: blur(12px);
@@ -80,9 +91,7 @@ body:has(.page-gallery),
 }
 
 .topbar .wrap {
-  width: min(1760px, calc(100vw - clamp(40px, 7vw, 128px)));
-  position: relative;
-  left: calc((100vw - 100%) / 2);
+  width: min(1760px, calc(100% - clamp(40px, 7vw, 128px)));
   min-height: 76px;
   display: flex;
   align-items: center;
@@ -146,10 +155,11 @@ body.scrolled .topbar .wrap {
 /* Shared Footer */
 .site-footer {
   width: 100%;
-  margin-top: clamp(10px, 1vw, 18px);
+  margin-top: auto;
+  flex-shrink: 0;
   background: var(--ink);
   color: var(--paper);
-  padding: clamp(6px, .6vw, 12px) 0;
+  padding: clamp(8px, .75vw, 14px) 0;
 }
 
 .site-footer-inner {
@@ -215,6 +225,13 @@ body.scrolled .topbar .wrap {
 /* =========================================
    HOME PAGE (.page-home)
    ========================================= */
+.page-home main#home {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+}
+
 .page-home h1,
 .page-home h2,
 .page-home p {
@@ -222,11 +239,12 @@ body.scrolled .topbar .wrap {
 }
 
 .page-home .hero {
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-  gap: clamp(28px, 5vw, 110px);
+  gap: clamp(28px, 4.5vw, 100px);
   align-items: center;
-  padding-block: clamp(48px, 6vw, 125px);
+  padding-block: clamp(20px, 3.5dvh, 56px);
 }
 
 .page-home .hero > div:first-child,
@@ -245,7 +263,7 @@ body.scrolled .topbar .wrap {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 22px;
+  margin: 0 0 clamp(12px, 2dvh, 22px);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .12em;
@@ -261,11 +279,11 @@ body.scrolled .topbar .wrap {
 
 .page-home h1 {
   max-width: 880px;
-  margin-bottom: 16px;
+  margin-bottom: clamp(12px, 1.8dvh, 18px);
   font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(48px, calc(5.5vw + 16px), 128px);
+  font-size: clamp(40px, min(calc(5.2vw + 12px), 10.5dvh), 120px);
   font-weight: 500;
-  line-height: .9;
+  line-height: .92;
 }
 
 .page-home h1 em {
@@ -275,10 +293,10 @@ body.scrolled .topbar .wrap {
 
 .page-home .intro {
   max-width: 680px;
-  margin: 0 0 30px;
+  margin: 0;
   color: var(--ink-soft);
-  font-size: clamp(16px, calc(.7vw + 8px), 24px);
-  line-height: 1.65;
+  font-size: clamp(15px, min(calc(.65vw + 8px), 2.3dvh), 22px);
+  line-height: 1.6;
 }
 
 .page-home .contact-link {
@@ -306,9 +324,11 @@ body.scrolled .topbar .wrap {
 
 .page-home .portrait {
   position: relative;
-  width: min(100%, 760px);
+  width: min(100%, 720px, calc((100dvh - 210px) * 4 / 3));
   aspect-ratio: 4 / 3;
   margin-inline: auto;
+  margin-bottom: 18px;
+  margin-right: 18px;
   background: var(--blue);
   isolation: isolate;
 }
@@ -337,59 +357,16 @@ body.scrolled .topbar .wrap {
   font-size: 11px;
 }
 
-@media (min-width: 701px) {
+/* Lock viewport height on wide screens when height is sufficient for 2-column hero */
+@media (min-width: 961px) and (min-height: 520px) {
   html:has(.page-home),
   body:has(.page-home) {
-    height: 100%;
+    height: 100dvh;
     overflow: hidden;
   }
 
   .page-home {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .page-home .topbar,
-  .page-home .site-footer {
-    flex-shrink: 0;
-  }
-
-  .page-home main#home {
-    flex: 1;
-  }
-}
-
-@media (min-width: 701px) and (max-height: 760px) {
-  .page-home .hero {
-    padding-block: clamp(18px, 3vh, 30px);
-  }
-
-  .page-home .portrait {
-    width: min(100%, 760px, 55vh);
-  }
-}
-
-@media (min-width: 701px) and (max-height: 540px) {
-  .page-home .hero {
-    gap: 24px;
-    padding-block: 12px;
-  }
-
-  .page-home .eyebrow { margin-bottom: 12px; }
-  .page-home h1 {
-    margin-bottom: 10px;
-    font-size: clamp(42px, 6vh, 58px);
-  }
-
-  .page-home .intro {
-    margin-bottom: 12px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .page-home .portrait {
-    width: min(100%, 55vh);
+    height: 100dvh;
   }
 }
 
@@ -398,7 +375,7 @@ body.scrolled .topbar .wrap {
    ========================================= */
 .page-gallery a { text-decoration: none; }
 .page-gallery img { max-width: 100%; display: block; }
-.page-gallery main { padding-block: clamp(10px, 1.5vw, 22px) 80px; }
+.page-gallery main { padding-block: clamp(10px, 1.5vw, 22px) 64px; }
 
 .page-gallery .gallery-grid {
   display: grid;
@@ -513,10 +490,9 @@ body.scrolled .topbar .wrap {
    CONTACT / ABOUT PAGE (.page-contact)
    ========================================= */
 .page-contact main {
-  min-height: calc(100vh - 76px);
   display: grid;
   align-content: center;
-  padding-block: 80px;
+  padding-block: clamp(40px, 6dvh, 80px);
   animation: content-enter .45s both;
 }
 
@@ -534,7 +510,7 @@ body.scrolled .topbar .wrap {
 .page-contact h1 {
   margin: 0 0 20px;
   font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(48px, 7.4vw, 88px);
+  font-size: clamp(42px, 7vw, 88px);
   font-weight: 500;
   line-height: .98;
 }
@@ -568,13 +544,47 @@ body.scrolled .topbar .wrap {
 .page-contact .email-link span { font-size: 17px; }
 
 /* =========================================
+   TABLET BREAKPOINT (max-width: 960px)
+   ========================================= */
+@media (max-width: 960px) {
+  .wrap,
+  .topbar .wrap,
+  .site-footer-inner,
+  .page-gallery > main.wrap,
+  .page-contact > main.wrap {
+    width: calc(100% - clamp(32px, 6vw, 64px));
+  }
+
+  .page-home .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(28px, 4dvh, 44px);
+    padding-block: clamp(28px, 4.5dvh, 56px);
+  }
+
+  .page-home h1 {
+    font-size: clamp(42px, 8vw, 76px);
+  }
+
+  .page-home .intro {
+    font-size: clamp(16px, 2.2vw, 20px);
+  }
+
+  .page-home .portrait {
+    width: min(calc(100% - 18px), 640px);
+    margin-inline: 0 auto;
+  }
+}
+
+/* =========================================
    MOBILE BREAKPOINT (max-width: 700px)
    ========================================= */
 @media (max-width: 700px) {
   .wrap,
+  .topbar .wrap,
+  .site-footer-inner,
   .page-gallery > main.wrap,
   .page-contact > main.wrap {
-    width: min(100% - 20px, 520px);
+    width: min(calc(100% - 24px), 540px);
   }
 
   .topbar {
@@ -583,7 +593,6 @@ body.scrolled .topbar .wrap {
   }
 
   .topbar .wrap {
-    width: min(calc(100vw - 20px), 520px);
     min-height: 44px;
     height: 44px;
     gap: 10px;
@@ -600,35 +609,46 @@ body.scrolled .topbar .wrap {
   }
 
   .wordmark img { height: 16px; }
-  .topbar nav { gap: 8px; }
+  .topbar nav { gap: 10px; }
   .topbar nav a { font-size: 12px; }
   body.scrolled .topbar nav a { font-size: 10px; }
 
   /* Home mobile */
   .page-home .hero {
     grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-    padding-block: 64px 72px;
+    gap: 32px;
+    padding-block: clamp(24px, 4dvh, 48px);
+  }
+
+  .page-home h1 {
+    font-size: clamp(38px, 11vw, 56px);
+  }
+
+  .page-home .intro {
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .page-home .portrait {
     width: calc(100% - 14px);
     min-width: 0;
-    min-height: 310px;
+    margin-bottom: 14px;
+    margin-right: 14px;
   }
 
-  .page-home .portrait img { min-height: 310px; }
+  .page-home .portrait::before {
+    inset: 14px -14px -14px 14px;
+  }
 
   /* Gallery mobile */
-  .page-gallery main { padding-top: clamp(10px, 3.5vw, 18px); }
+  .page-gallery main { padding-block: clamp(12px, 3.5vw, 18px) 48px; }
   .page-gallery .card img { aspect-ratio: 16 / 9; }
 
   /* Contact mobile */
   .page-contact main {
-    min-height: calc(100vh - 44px);
-    padding-block: 56px;
+    padding-block: 48px;
   }
-  .page-contact h1 { font-size: clamp(42px, 12vw, 64px); }
+  .page-contact h1 { font-size: clamp(38px, 11vw, 60px); }
   .page-contact .email-link { font-size: 16px; }
 }
 

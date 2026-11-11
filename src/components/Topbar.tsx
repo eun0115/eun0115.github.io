@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Topbar() {
   const pathname = usePathname() || '/';
+  const [scrolled, setScrolled] = useState(false);
+
   const isGallery =
     pathname === '/gallery' ||
     pathname === '/gallery.html' ||
@@ -16,8 +18,9 @@ export default function Topbar() {
     pathname === '/contact/';
 
   useEffect(() => {
+    let isCompact = false;
+
     const syncNavState = () => {
-      const isCompact = document.body.classList.contains('scrolled');
       const collapseDistance = window.innerWidth <= 700 ? 16 : 40;
       const canCompact =
         document.documentElement.scrollHeight - window.innerHeight >
@@ -27,7 +30,8 @@ export default function Topbar() {
         : window.scrollY > 40 && canCompact;
 
       if (shouldCompact !== isCompact) {
-        document.body.classList.toggle('scrolled', shouldCompact);
+        isCompact = shouldCompact;
+        setScrolled(shouldCompact);
       }
     };
 
@@ -54,7 +58,7 @@ export default function Topbar() {
   }, [pathname]);
 
   return (
-    <header className="topbar">
+    <header className={scrolled ? 'topbar scrolled' : 'topbar'}>
       <div className="wrap">
         <Link className="wordmark" href="/" aria-label="Home">
           <img src="/assets/logo.svg" alt="Logo" />

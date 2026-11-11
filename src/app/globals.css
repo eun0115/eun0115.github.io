@@ -100,10 +100,12 @@ body:has(.page-gallery),
   transition: min-height .2s ease;
 }
 
+.topbar.scrolled,
 body.scrolled .topbar {
   box-shadow: 0 8px 22px rgba(18, 61, 95, .06);
 }
 
+.topbar.scrolled .wrap,
 body.scrolled .topbar .wrap {
   min-height: 36px;
 }
@@ -352,6 +354,11 @@ body.scrolled .topbar .wrap {
   isolation: isolate;
 }
 
+.page-contact .portrait {
+  width: min(100%, 460px, calc((100dvh - 210px) * 3 / 4));
+  aspect-ratio: 3 / 4;
+}
+
 .page-home .portrait::before,
 .page-contact .portrait::before {
   position: absolute;
@@ -563,9 +570,13 @@ body.scrolled .topbar .wrap {
     font-size: clamp(16px, 2.2vw, 20px);
   }
 
-  .page-home .portrait,
-  .page-contact .portrait {
+  .page-home .portrait {
     width: min(calc(100% - 18px), 640px);
+    margin-inline: 0 auto;
+  }
+
+  .page-contact .portrait {
+    width: min(calc(100% - 18px), 420px);
     margin-inline: 0 auto;
   }
 }
@@ -593,11 +604,13 @@ body.scrolled .topbar .wrap {
     gap: 10px;
   }
 
+  .topbar.scrolled,
   body.scrolled .topbar {
     min-height: 28px;
     height: 28px;
   }
 
+  .topbar.scrolled .wrap,
   body.scrolled .topbar .wrap {
     min-height: 28px;
     height: 28px;
@@ -606,6 +619,7 @@ body.scrolled .topbar .wrap {
   .wordmark img { height: 16px; }
   .topbar nav { gap: 10px; }
   .topbar nav a { font-size: 12px; }
+  .topbar.scrolled nav a,
   body.scrolled .topbar nav a { font-size: 10px; }
 
   /* Home & Contact mobile */
@@ -633,6 +647,10 @@ body.scrolled .topbar .wrap {
     min-width: 0;
     margin-bottom: 14px;
     margin-right: 14px;
+  }
+
+  .page-contact .portrait {
+    width: min(calc(100% - 14px), 360px);
   }
 
   .page-home .portrait::before,

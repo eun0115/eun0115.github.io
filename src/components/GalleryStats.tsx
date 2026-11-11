@@ -95,7 +95,7 @@ export default function GalleryStats({ items }: GalleryStatsProps) {
             <span className="rankings-title">
               {activeTab === 'airlines'
                 ? 'Airlines Ranked by Photos Spotted'
-                : 'Aircraft Models Ranked by Photos Spotted'}
+                : 'Aircraft Ranked by Photos Spotted'}
             </span>
             <button
               type="button"

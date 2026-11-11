@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { galleryItems } from '@/data/gallery';
 
 export const metadata: Metadata = {
-  title: 'eun0115 | Gallery',
+  title: 'eun0115 | Spotting Gallery',
 };
 
 export default function GalleryPage() {
@@ -18,8 +18,6 @@ export default function GalleryPage() {
             <article className="card" key={item.thumb}>
               <img
                 src={item.thumb}
-                srcSet={item.thumbSrcSet}
-                sizes="(max-width: 700px) min(calc(100vw - 20px), 520px), (max-width: 1200px) 33vw, 340px"
                 alt={`${item.airline} - ${item.tag}`}
                 loading={index < 8 ? 'eager' : 'lazy'}
                 decoding="async"

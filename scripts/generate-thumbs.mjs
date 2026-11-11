@@ -2,45 +2,51 @@ import fs from 'fs';
 import path from 'path';
 import { execFileSync } from 'child_process';
 
-const widths = [640, 1280];
 const thumbsRoot = path.resolve('public', 'thumbs');
 
-// Recursively scan public/thumbs for any raw .png / .jpg / .jpeg files,
-// convert them to -640w.webp and -1280w.webp, and remove the heavy original.
-function convertRawImages(dir) {
-  if (!fs.existsSync(dir)) return 0;
-  let count = 0;
+// Recursively scan public/thumbs:
+// - Remove any legacy -640w.webp files
+// - Convert any raw .png / .jpg / .jpeg files to sharp -1280w.webp and remove the raw original
+function processThumbsDir(dir) {
+  if (!fs.existsSync(dir)) return { converted: 0, removed640: 0 };
+  let converted = 0;
+  let removed640 = 0;
+
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      count += convertRawImages(fullPath);
+      const sub = processThumbsDir(fullPath);
+      converted += sub.converted;
+      removed640 += sub.removed640;
+    } else if (/-640w\.webp$/i.test(entry.name)) {
+      fs.unlinkSync(fullPath);
+      removed640++;
     } else if (/\.(png|jpe?g)$/i.test(entry.name)) {
       const parsed = path.parse(fullPath);
-      for (const w of widths) {
-        const outFile = path.join(parsed.dir, `${parsed.name}-${w}w.webp`);
-        const vf = `scale='min(${w},iw)':-2:flags=lanczos+accurate_rnd+full_chroma_int,unsharp=3:3:0.4:3:3:0.0`;
-        execFileSync('ffmpeg', [
-          '-y',
-          '-v', 'error',
-          '-i', fullPath,
-          '-vf', vf,
-          '-c:v', 'libwebp',
-          '-q:v', '95',
-          '-compression_level', '6',
-          outFile,
-        ]);
-      }
+      const baseName = parsed.name.replace(/-1280w$/i, '');
+      const outFile = path.join(parsed.dir, `${baseName}-1280w.webp`);
+      const vf = `scale='min(1280,iw)':-2:flags=lanczos+accurate_rnd+full_chroma_int,unsharp=3:3:0.4:3:3:0.0`;
+      execFileSync('ffmpeg', [
+        '-y',
+        '-v', 'error',
+        '-i', fullPath,
+        '-vf', vf,
+        '-c:v', 'libwebp',
+        '-q:v', '95',
+        '-compression_level', '6',
+        outFile,
+      ]);
       fs.unlinkSync(fullPath);
       console.log(`Converted & removed raw image: ${path.relative(thumbsRoot, fullPath)}`);
-      count++;
+      converted++;
     }
   }
-  return count;
+  return { converted, removed640 };
 }
 
-const converted = convertRawImages(thumbsRoot);
+const { converted, removed640 } = processThumbsDir(thumbsRoot);
 
-// Also normalize any entries in src/data/gallery.ts so you only need to write `thumb`
+// Normalize entries in src/data/gallery.ts to use -1280w.webp
 const galleryFile = path.resolve('src/data/gallery.ts');
 const content = fs.readFileSync(galleryFile, 'utf8');
 const match = content.match(/export const galleryItems:\s*GalleryItem\[\]\s*=\s*(\[[\s\S]*\]);/);
@@ -55,13 +61,11 @@ if (match) {
       airline: item.airline,
       ...(item.subtitle ? { subtitle: item.subtitle } : {}),
       thumb: `${rawThumb}-1280w.webp`,
-      thumbSrcSet: `${rawThumb}-640w.webp 640w, ${rawThumb}-1280w.webp 1280w`,
     };
   });
 
   const updatedTs = `export interface GalleryItem {
   thumb: string;
-  thumbSrcSet: string;
   tag: string;
   airline: string;
   subtitle?: string;
@@ -70,5 +74,7 @@ if (match) {
 export const galleryItems: GalleryItem[] = ${JSON.stringify(items, null, 2)};
 `;
   fs.writeFileSync(galleryFile, updatedTs, 'utf8');
-  console.log(`Done! Converted ${converted} new raw image(s) and synced ${items.length} gallery entries.`);
+  console.log(
+    `Done! Converted ${converted} new raw image(s), removed ${removed640} legacy -640w file(s), and synced ${items.length} gallery entries to -1280w.webp.`
+  );
 }

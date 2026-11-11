@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import type { GalleryItem } from '@/data/gallery';
+import { getAircraftName, getAirlineName } from '@/lib/gallery';
 
 interface GalleryStatsProps {
   items: GalleryItem[];
@@ -15,10 +16,10 @@ export default function GalleryStats({ items }: GalleryStatsProps) {
     const aircraftMap = new Map<string, number>();
 
     for (const item of items) {
-      const airline = item.airline.trim();
+      const airline = getAirlineName(item);
       airlineMap.set(airline, (airlineMap.get(airline) || 0) + 1);
 
-      const aircraft = (item.tag.split('|')[1] || item.tag).trim();
+      const aircraft = getAircraftName(item);
       aircraftMap.set(aircraft, (aircraftMap.get(aircraft) || 0) + 1);
     }
 

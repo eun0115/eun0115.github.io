@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
 import GalleryStats from '@/components/GalleryStats';
+import GalleryBrowser from '@/components/GalleryBrowser';
 import { galleryItems } from '@/data/gallery';
 
 export const metadata: Metadata = {
@@ -15,28 +16,7 @@ export default function GalleryPage() {
 
       <main className="wrap">
         <GalleryStats items={galleryItems} />
-
-        <section className="gallery-grid">
-          {galleryItems.map((item, index) => (
-            <article className="card" key={item.thumb}>
-              <img
-                src={item.thumb}
-                alt={`${item.airline} - ${item.tag}`}
-                loading={index < 8 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
-              <div className="card-body">
-                <span className="card-tag">{item.tag}</span>
-                <div className="card-header card-header-stack">
-                  <h2 tabIndex={0}>{item.airline}</h2>
-                  {item.subtitle && (
-                    <h4 className="card-subtitle">{item.subtitle}</h4>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
-        </section>
+        <GalleryBrowser items={galleryItems} />
       </main>
 
       <Footer />

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
+import GalleryStats from '@/components/GalleryStats';
 import { galleryItems } from '@/data/gallery';
 
 export const metadata: Metadata = {
@@ -13,6 +14,8 @@ export default function GalleryPage() {
       <Topbar />
 
       <main className="wrap">
+        <GalleryStats items={galleryItems} />
+
         <section className="gallery-grid">
           {galleryItems.map((item, index) => (
             <article className="card" key={item.thumb}>

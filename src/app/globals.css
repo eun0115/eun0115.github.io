@@ -570,42 +570,30 @@ body.scrolled .topbar .wrap {
   gap: 6px;
 }
 
-.page-gallery .rank-card.rank-top-1 {
-  border-color: rgba(217, 119, 6, .45);
-  background: rgba(254, 243, 199, .45);
-}
-
-.page-gallery .rank-card.rank-top-2 {
-  border-color: rgba(100, 116, 139, .4);
-  background: rgba(241, 245, 249, .65);
-}
-
-.page-gallery .rank-card.rank-top-3 {
-  border-color: rgba(180, 83, 9, .35);
-  background: rgba(255, 237, 213, .45);
-}
-
 .page-gallery .rank-card-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 10px;
   font-size: 12px;
+  line-height: 1.2;
 }
 
 .page-gallery .rank-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 20px;
+  background: rgba(76, 142, 203, .12);
+  color: var(--blue-accent);
   font-size: 11px;
   font-weight: 700;
-  color: var(--blue-accent);
-  min-width: 24px;
+  font-variant-numeric: tabular-nums;
 }
 
-.page-gallery .rank-top-1 .rank-number { color: #b45309; }
-.page-gallery .rank-top-2 .rank-number { color: #475569; }
-.page-gallery .rank-top-3 .rank-number { color: #9a3412; }
-
 .page-gallery .rank-name {
-  flex: 1;
+  min-width: 0;
   font-weight: 600;
   color: var(--ink);
   overflow: hidden;
@@ -614,6 +602,7 @@ body.scrolled .topbar .wrap {
 }
 
 .page-gallery .rank-count {
+  text-align: right;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--ink);

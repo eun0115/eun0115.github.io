@@ -112,7 +112,7 @@ export default function GalleryStats({ items }: GalleryStatsProps) {
               return (
                 <li
                   key={entry.name}
-                  className={`rank-card ${rank <= 3 ? `rank-top-${rank}` : ''}`}
+                  className="rank-card"
                 >
                   <div className="rank-card-top">
                     <span className="rank-number">#{rank}</span>

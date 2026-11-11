@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
+import VisitorCounter from '@/components/VisitorCounter';
 
 export const metadata: Metadata = {
   title: 'eun0115 | About',
@@ -21,9 +22,12 @@ export default function ContactPage() {
               Philippines. This site is my personal corner of the web and keep
               track of the things i captured along the way.
             </p>
-            <a className="email-link" href="mailto:gpestacio5@gmail.com">
-              Get in touch <span aria-hidden="true">↗</span>
-            </a>
+            <div className="contact-meta">
+              <a className="email-link" href="mailto:gpestacio5@gmail.com">
+                Get in touch <span aria-hidden="true">↗</span>
+              </a>
+              <VisitorCounter />
+            </div>
           </div>
           <div className="portrait">
             <img src="/assets/eun.jpg" alt="Gian Paolo (eun0115)" />

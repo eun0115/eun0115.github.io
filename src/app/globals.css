@@ -521,6 +521,13 @@ body.scrolled .topbar .wrap {
 /* =========================================
    CONTACT / ABOUT PAGE (.page-contact)
    ========================================= */
+.page-contact .contact-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+
 .page-contact .email-link {
   display: inline-flex;
   align-items: center;
@@ -540,6 +547,36 @@ body.scrolled .topbar .wrap {
 }
 
 .page-contact .email-link span { font-size: 17px; }
+
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .45);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.visitor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-accent);
+}
+
+.visitor-label {
+  font-weight: 600;
+}
+
+.visitor-value {
+  color: var(--ink);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
 
 /* =========================================
    TABLET BREAKPOINT (max-width: 960px)

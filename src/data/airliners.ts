@@ -2,11 +2,6 @@ import type { GalleryItem } from './gallery';
 
 export const airliners: GalleryItem[] = [
   {
-    "tag": "B-LDQ | Airbus A330-300P2F",
-    "airline": "Air Hong Kong",
-    "thumb": "/thumbs/Hong Kong/Air HongKong/B-LDQ-1280w.webp"
-  },
-  {
     "tag": "B-MCF | Airbus A320-200",
     "airline": "Air Macau",
     "thumb": "/thumbs/Macau/Air Macau/B-MCF-1280w.webp"
@@ -361,11 +356,6 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/Philippines/Royal Air Philippines/RP-C9869-1280w.webp"
   },
   {
-    "tag": "4K-SW888 | Boeing 747-400F",
-    "airline": "SilkWay West Airlines",
-    "thumb": "/thumbs/Azerbaijan/Silk Way West Airlines/4K-SW888-1280w.webp"
-  },
-  {
     "tag": "9V-MBI | Boeing 737max 8",
     "airline": "Singapore Airlines",
     "thumb": "/thumbs/Singapore/Singapore Airlines/9V-MBI-1280w.webp"
@@ -472,10 +462,5 @@ export const airliners: GalleryItem[] = [
     "tag": "B-1969 | Boeing 737-800",
     "airline": "Xiamen Air",
     "thumb": "/thumbs/China/Xiamen Air/B-1969-1280w.webp"
-  },
-  {
-    "tag": "B-2851 | Boeing 757-200PCF",
-    "airline": "YTO Cargo Airlines",
-    "thumb": "/thumbs/China/YTO Cargo Airlines/B-2851-1280w.webp"
   }
 ];

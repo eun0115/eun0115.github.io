@@ -49,6 +49,7 @@ const { converted, removed640 } = processThumbsDir(thumbsRoot);
 // Normalize categorized gallery entries to use -1280w.webp.
 const galleryFiles = [
   ['src/data/airliners.ts', 'airliners'],
+  ['src/data/cargo.ts', 'cargo'],
   ['src/data/military.ts', 'military'],
   ['src/data/general-aviation.ts', 'generalAviation'],
 ];

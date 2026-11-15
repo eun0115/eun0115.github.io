@@ -18,7 +18,7 @@ public/thumbs/<Country>/<Airline>/<Registration>.png
 
 ### 2. Add the entry to a category file
 
-Add the picture entry to the appropriate list: `src/data/airliners.ts`, `src/data/military.ts`, or `src/data/general-aviation.ts`. The gallery combines these lists automatically.
+Add the picture entry to the appropriate list: `src/data/airliners.ts`, `src/data/cargo.ts`, `src/data/military.ts`, or `src/data/general-aviation.ts`. The gallery combines these lists automatically.
 
 You can write either `.png`/`.jpg` or `-1280w.webp` in `thumb`—the script normalizes it to `-1280w.webp` automatically:
 

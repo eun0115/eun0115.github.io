@@ -24,6 +24,7 @@ export const generalAviation: GalleryItem[] = [
   {
     "tag": "A7-CGL | Gulfstream G650ER",
     "airline": "Qatar Executive",
+    "subtitle": "FIFA President Gianni Infantino",
     "thumb": "/thumbs/Qatar/Qatar Executive/A7-CGL-1280w.webp"
   }
 ];

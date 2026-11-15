@@ -431,11 +431,6 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/Thailand/Thai Airways/HS-TOG-1280w.webp"
   },
   {
-    "tag": "HS-TOG | Airbus A350-900",
-    "airline": "Thai Airways",
-    "thumb": "/thumbs/Thailand/Thai Airways/HS-TOG-1280w.webp"
-  },
-  {
     "tag": "HS-TXS | Airbus A320-200",
     "airline": "Thai Airways",
     "subtitle": "Former Thai Smile",
@@ -493,10 +488,10 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/Vietnam/Vietnam Airlines/VN-A623-1280w.webp"
   },
   {
-    "tag": "VN-A899 | Airbus A350-900",
+    "tag": "VN-A889 | Airbus A350-900",
     "airline": "Vietnam Airlines",
     "subtitle": "Prime Minister Lê Minh Hưng",
-    "thumb": "/thumbs/Vietnam/Vietnam Airlines/VN-A899-1280w.webp"
+    "thumb": "/thumbs/Vietnam/Vietnam Airlines/VN-A889-1280w.webp"
   },
   {
     "tag": "B-1969 | Boeing 737-800",
@@ -515,7 +510,7 @@ export const airliners: GalleryItem[] = [
   },
   {
     "tag": "HZ-AR26 | Boeing 787-10 Dreamliner",
-    "airline": "Air Canada",
+    "airline": "Saudia",
     "thumb": "/thumbs/Saudi Arabia/Saudia/HZ-AR26-1280w.webp"
   },
 ];

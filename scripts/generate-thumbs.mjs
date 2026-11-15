@@ -46,11 +46,24 @@ function processThumbsDir(dir) {
 
 const { converted, removed640 } = processThumbsDir(thumbsRoot);
 
-// Normalize entries in src/data/gallery.ts to use -1280w.webp
-const galleryFile = path.resolve('src/data/gallery.ts');
-const content = fs.readFileSync(galleryFile, 'utf8');
-const match = content.match(/export const galleryItems:\s*GalleryItem\[\]\s*=\s*(\[[\s\S]*\]);/);
-if (match) {
+// Normalize categorized gallery entries to use -1280w.webp.
+const galleryFiles = [
+  ['src/data/airliners.ts', 'airliners'],
+  ['src/data/military.ts', 'military'],
+  ['src/data/general-aviation.ts', 'generalAviation'],
+];
+
+let syncedEntries = 0;
+for (const [file, exportName] of galleryFiles) {
+  const galleryFile = path.resolve(file);
+  const content = fs.readFileSync(galleryFile, 'utf8');
+  const match = content.match(
+    new RegExp(`export const ${exportName}:\\s*GalleryItem\\[\\]\\s*=\\s*(\\[[\\s\\S]*\\]);`)
+  );
+  if (!match) {
+    throw new Error(`Could not find ${exportName} entries in ${file}`);
+  }
+
   const items = JSON.parse(match[1]).map((item) => {
     const rawThumb = (item.thumb || item.src || '')
       .replace(/\\/g, '/')
@@ -64,17 +77,9 @@ if (match) {
     };
   });
 
-  const updatedTs = `export interface GalleryItem {
-  thumb: string;
-  tag: string;
-  airline: string;
-  subtitle?: string;
+  fs.writeFileSync(galleryFile, content.replace(match[1], JSON.stringify(items, null, 2)), 'utf8');
+  syncedEntries += items.length;
 }
-
-export const galleryItems: GalleryItem[] = ${JSON.stringify(items, null, 2)};
-`;
-  fs.writeFileSync(galleryFile, updatedTs, 'utf8');
-  console.log(
-    `Done! Converted ${converted} new raw image(s), removed ${removed640} legacy -640w file(s), and synced ${items.length} gallery entries to -1280w.webp.`
-  );
-}
+console.log(
+  `Done! Converted ${converted} new raw image(s), removed ${removed640} legacy -640w file(s), and synced ${syncedEntries} categorized gallery entries to -1280w.webp.`
+);

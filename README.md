@@ -16,9 +16,11 @@ public/thumbs/<Country>/<Airline>/<Registration>.png
 
 *(For example: `public/thumbs/Philippines/Philippine Airlines/RP-C3512.png`)*
 
-### 2. Add the entry in `src/data/gallery.ts`
+### 2. Add the entry to a category file
 
-Add an object to `galleryItems` in `src/data/gallery.ts` (you can write either `.png`/`.jpg` or `-1280w.webp` in `thumb`—the script normalizes it to `-1280w.webp` automatically):
+Add the picture entry to the appropriate list: `src/data/airliners.ts`, `src/data/military.ts`, or `src/data/general-aviation.ts`. The gallery combines these lists automatically.
+
+You can write either `.png`/`.jpg` or `-1280w.webp` in `thumb`—the script normalizes it to `-1280w.webp` automatically:
 
 ```ts
   {
@@ -41,4 +43,4 @@ That command will automatically:
 
 1. Convert your new `.png`/`.jpg` into a sharp `-1280w.webp` thumbnail,
 2. Delete the heavy original `.png`/`.jpg` so it doesn't eat storage, and
-3. Normalize `thumb` to `-1280w.webp` in `src/data/gallery.ts`.
+3. Normalize `thumb` to `-1280w.webp` in each category file.

@@ -599,6 +599,15 @@ body.scrolled .topbar .wrap {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: block;
+}
+
+.page-gallery .rank-origin {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink-soft);
+  font-size: 10px;
+  line-height: 1.2;
 }
 
 .page-gallery .rank-count {

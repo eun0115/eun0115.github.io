@@ -8,26 +8,43 @@ interface GalleryStatsProps {
   items: GalleryItem[];
 }
 
+interface RankingEntry {
+  name: string;
+  count: number;
+  origin?: string;
+}
+
 export default function GalleryStats({ items }: GalleryStatsProps) {
   const [activeTab, setActiveTab] = useState<'none' | 'airlines' | 'aircrafts'>('none');
 
   const { airlineRanks, aircraftRanks } = useMemo(() => {
-    const airlineMap = new Map<string, number>();
+    const airlineMap = new Map<string, { count: number; countries: Set<string> }>();
     const aircraftMap = new Map<string, number>();
 
     for (const item of items) {
       const airline = getAirlineName(item);
-      airlineMap.set(airline, (airlineMap.get(airline) || 0) + 1);
+      const country = item.thumb.split('/')[2];
+      const airlineStats = airlineMap.get(airline) || {
+        count: 0,
+        countries: new Set<string>(),
+      };
+      airlineStats.count += 1;
+      if (country) airlineStats.countries.add(country);
+      airlineMap.set(airline, airlineStats);
 
       const aircraft = getAircraftName(item);
       aircraftMap.set(aircraft, (aircraftMap.get(aircraft) || 0) + 1);
     }
 
-    const airlineRanks = Array.from(airlineMap.entries())
-      .map(([name, count]) => ({ name, count }))
+    const airlineRanks: RankingEntry[] = Array.from(airlineMap.entries())
+      .map(([name, stats]) => ({
+        name,
+        count: stats.count,
+        origin: Array.from(stats.countries).sort((a, b) => a.localeCompare(b)).join(', '),
+      }))
       .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
-    const aircraftRanks = Array.from(aircraftMap.entries())
+    const aircraftRanks: RankingEntry[] = Array.from(aircraftMap.entries())
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
@@ -117,7 +134,12 @@ export default function GalleryStats({ items }: GalleryStatsProps) {
                 >
                   <div className="rank-card-top">
                     <span className="rank-number">#{rank}</span>
-                    <span className="rank-name">{entry.name}</span>
+                    <span>
+                      <span className="rank-name">{entry.name}</span>
+                      {activeTab === 'airlines' && entry.origin && (
+                        <span className="rank-origin">Origin: {entry.origin}</span>
+                      )}
+                    </span>
                     <span className="rank-count">{entry.count}</span>
                   </div>
                   <div className="rank-bar-track" aria-hidden="true">

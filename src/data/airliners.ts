@@ -97,6 +97,12 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/Philippines/Cebu Pacific/RP-C4137-1280w.webp"
   },
   {
+    "tag": "RP-C4148 | Airbus A321neo",
+    "airline": "Cebu Pacific",
+    "subtitle": "Prime Minister Xanana Gusmão",
+    "thumb": "/thumbs/Philippines/Cebu Pacific/RP-C4148-1280w.webp"
+  },
+  {
     "tag": "RP-C4156 | Airbus A320-200",
     "airline": "Cebu Pacific",
     "subtitle": "let's fly every Juan Livery",
@@ -146,6 +152,12 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/United Arab Emirates/Etihad/A6-BLV-1280w.webp"
   },
   {
+    "tag": "A6-ETS | Boeing 777-300ER",
+    "airline": "Etihad Airways",
+    "subtitle": "Old Livery",
+    "thumb": "/thumbs/United Arab Emirates/Etihad/A6-ETS-1280w.webp"
+  },
+  {
     "tag": "B-16331 | Airbus A330-300",
     "airline": "EVA Air",
     "subtitle": "Bad Badtz-Maru Livery",
@@ -161,6 +173,11 @@ export const airliners: GalleryItem[] = [
     "airline": "Gulf Air",
     "subtitle": "Retro Livery",
     "thumb": "/thumbs/Bahrain/Gulf Air/A9C-FG-1280w.webp"
+  },
+  {
+    "tag": "A9C-FJ | Boeing 787-9 Dreamliner",
+    "airline": "Gulf Air",
+    "thumb": "/thumbs/Bahrain/Gulf Air/A9C-FJ-1280w.webp"
   },
   {
     "tag": "9H-HFJ | Airbus A330-200",
@@ -205,6 +222,12 @@ export const airliners: GalleryItem[] = [
     "airline": "Malaysia AirAsia",
     "subtitle": "Allstars Livery",
     "thumb": "/thumbs/Malaysia/AirAsia/9M-AFD-1280w.webp"
+  },
+  {
+    "tag": "9M-AGJ | Airbus A320neo",
+    "airline": "Malaysia AirAsia",
+    "subtitle": "Visit Malaysia, Truly Asia 2026 Livery",
+    "thumb": "/thumbs/Malaysia/AirAsia/9M-AGJ-1280w.webp"
   },
   {
     "tag": "9M-AGE | Airbus A320neo",
@@ -402,6 +425,12 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/Thailand/Thai Airways/HS-TOA-1280w.webp"
   },
   {
+    "tag": "HS-TOG | Airbus A321neo",
+    "airline": "Thai Airways",
+    "subtitle": "Prime Minister Saleumxay Kommasith",
+    "thumb": "/thumbs/Thailand/Thai Airways/HS-TOG-1280w.webp"
+  },
+  {
     "tag": "HS-TOG | Airbus A350-900",
     "airline": "Thai Airways",
     "thumb": "/thumbs/Thailand/Thai Airways/HS-TOG-1280w.webp"
@@ -439,6 +468,11 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/United States of America/United Airlines/N2333U-1280w.webp"
   },
   {
+    "tag": "N2749U | Boeing 777-300ER",
+    "airline": "United Airlines",
+    "thumb": "/thumbs/United States of America/United Airlines/N2749U-1280w.webp"
+  },
+  {
     "tag": "VN-A544 | Airbus A321-200",
     "airline": "VietJet Air",
     "thumb": "/thumbs/Vietnam/VietJet Air/VN-A544-1280w.webp"
@@ -459,8 +493,29 @@ export const airliners: GalleryItem[] = [
     "thumb": "/thumbs/Vietnam/Vietnam Airlines/VN-A623-1280w.webp"
   },
   {
+    "tag": "VN-A899 | Airbus A350-900",
+    "airline": "Vietnam Airlines",
+    "subtitle": "Prime Minister Lê Minh Hưng",
+    "thumb": "/thumbs/Vietnam/Vietnam Airlines/VN-A899-1280w.webp"
+  },
+  {
     "tag": "B-1969 | Boeing 737-800",
     "airline": "Xiamen Air",
     "thumb": "/thumbs/China/Xiamen Air/B-1969-1280w.webp"
-  }
+  },
+  {
+    "tag": "V8-RBA | A320Neo",
+    "airline": "Royal Brunei Airlines",
+    "thumb": "/thumbs/Brunei/Royal Brunei Airlines/V8-RBA-1280w.webp"
+  },
+  {
+    "tag": "C-FGEI | Boeing 787-9 Dreamliner",
+    "airline": "Air Canada",
+    "thumb": "/thumbs/Canada/Air Canada/C-FGEI-1280w.webp"
+  },
+  {
+    "tag": "HZ-AR26 | Boeing 787-10 Dreamliner",
+    "airline": "Air Canada",
+    "thumb": "/thumbs/Saudi Arabia/Saudia/HZ-AR26-1280w.webp"
+  },
 ];
